@@ -47,7 +47,7 @@ class Cadastro(Tk):
             passwordCod = hashlib.md5(password.encode()).hexdigest()
             print(login, password, passwordCod, codigo)
             try:
-                banco = sqlite3.connect(r'//NasTecplas/Pintura/DB/pintura.db')
+                banco = sqlite3.connect(r'fpq_status.db')
                 cursor = banco.cursor()
                 cursor.execute(f"""
                                INSERT INTO operadores 
