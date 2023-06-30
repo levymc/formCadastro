@@ -1,6 +1,6 @@
 import hashlib
 
-password = input("digite sua senha:")
+password = '302911'
 passwordCod = hashlib.md5(password.encode()).hexdigest()
 
 print(passwordCod)
