@@ -39,28 +39,26 @@ class Cadastro(Tk):
         self.mainloop()
     
     def insere(self, event):
-        response = messagebox.askquestion(message="Fazer o cadastro?")
-        if response == True:
-            login = self.login.get()
-            password = self.password.get()
-            codigo = self.codigo.get()
-            passwordCod = hashlib.md5(password.encode()).hexdigest()
-            print(login, password, passwordCod, codigo)
-            try:
-                banco = sqlite3.connect(r'fpq_status.db')
-                cursor = banco.cursor()
-                cursor.execute(f"""
-                               INSERT INTO operadores 
-                               (codigo, usuario, senha, priority)
-                               VALUES ({codigo}, {login}, {password}, user)
-                               """)
-                banco.commit()
-                cursor.close()
-                banco.close()
-            except Exception as e:
-                print(e)
-                messagebox.showerror(message="Algum erro aconteceu.") 
-        else: messagebox.showinfo(message = 'Cadastro não realizado')
+        login = self.login.get()
+        password = self.password.get()
+        codigo = self.codigo.get()
+        passwordCod = hashlib.md5(password.encode()).hexdigest()
+        print(login, password, passwordCod, codigo)
+        try:
+            banco = sqlite3.connect(r'fpq_status.db')
+            cursor = banco.cursor()
+            cursor.execute(f"""
+                            INSERT INTO operadores 
+                            (codigo, usuario, senha, priority)
+                            VALUES ('{codigo}', '{login}', '{password}', 'admin')
+                            """)
+            banco.commit()
+            messagebox.showinfo(message="Cadastro Realizado!")
+            cursor.close()
+            banco.close()
+        except Exception as e:
+            print(e)
+            messagebox.showerror(message="Algum erro aconteceu.") 
         
 if __name__ == "__main__":
     app = Cadastro()
